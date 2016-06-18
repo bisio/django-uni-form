@@ -11,6 +11,7 @@ from django.core.urlresolvers import reverse, NoReverseMatch
 from django.forms.forms import BoundField
 from django.template import Context, Template
 from django.template.loader import render_to_string
+from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 
 
@@ -251,7 +252,7 @@ class Fieldset(object):
     def __init__(self, legend, *fields, **kwargs):
         self.css_class = kwargs.get('css_class', None)
         self.css_id = kwargs.get('css_id', None)
-        self.legend = Template(legend)
+        self.legend = Template(force_unicode(legend))
         self.fields = list(fields)
     
     def render(self, form, form_style, context):
